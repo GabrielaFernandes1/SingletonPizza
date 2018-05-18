@@ -5,6 +5,7 @@
  */
 package br.com.gabriela.objeto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,13 +26,15 @@ public class Pizza {
         }
         return "Pizza{" + "id=" + id + ", sabor=" + sabor + ", kal=" + kal + ", ingredientes=" + todosIngredientes + '}';
     }
+
+    public Pizza() {
+        
+        this.ingredientes =new ArrayList <>();
+    }
     
     
 
-    public Pizza(String sabor, int kal) {
-        this.sabor = sabor;
-        this.kal = kal;
-    }
+    
     
     
 

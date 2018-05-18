@@ -5,17 +5,25 @@
  */
 package br.com.gabriela.formulario;
 
+import br.com.gabriela.objeto.Pizza;
+import br.com.gabriela.singleton.SPizza;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author SATC
  */
 public class CadastroPizza extends javax.swing.JFrame {
+    Pizza p = new Pizza();
+    
 
     /**
      * Creates new form CadastroPizza
      */
     public CadastroPizza() {
         initComponents();
+        jTId.setText(Integer.toString(SPizza.getInstance().getPizzas().size()));
+        jLTodosIngredientes.setText(p.getIngredientes().toString());
     }
 
     /**
@@ -120,12 +128,22 @@ public class CadastroPizza extends javax.swing.JFrame {
 
         jBAdicionar.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jBAdicionar.setText("+");
+        jBAdicionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBAdicionarActionPerformed(evt);
+            }
+        });
 
         jLTodosIngredientes.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLTodosIngredientes.setText("INGREDIENTES");
 
         jBRemover.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jBRemover.setText("-");
+        jBRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBRemoverActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -198,6 +216,26 @@ public class CadastroPizza extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jBAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAdicionarActionPerformed
+        if(!(jTNomeIngredientes.getText().equals(""))){
+          p.getIngredientes().add(jTNomeIngredientes.getText());
+          jLTodosIngredientes.setText(p.getIngredientes().toString());
+        } else {
+            JOptionPane.showMessageDialog(this, "Campo em Branco, Favor Digitar um Ingrediente!!");
+        }
+        
+    }//GEN-LAST:event_jBAdicionarActionPerformed
+
+    private void jBRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRemoverActionPerformed
+        try {
+          p.getIngredientes().remove(p.getIngredientes().size()-1);
+        jLTodosIngredientes.setText(p.getIngredientes().toString());  
+        } catch (IndexOutOfBoundsException iobe) {
+            JOptionPane.showMessageDialog(this,"A Lista Está Vazia!! \n" + iobe);
+        }
+        
+    }//GEN-LAST:event_jBRemoverActionPerformed
 
     /**
      * @param args the command line arguments
